@@ -1,3 +1,5 @@
+import org.codehaus.groovy.runtime.StackTraceUtils
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -16,6 +18,53 @@ allprojects {
     repositories {
         jcenter()
     }
+}
+
+int getSdkVersion(int defaultSdk) {
+    try {
+        def sdks = sdksAvailable()
+        if (sdks.contains(defaultSdk)) {
+            println "Use default SDK " + defaultSdk
+            defaultSdk
+        } else {
+            println "Default SDK not found, use highest found SDK " + sdks[0]
+            sdks[0]
+        }
+    } catch (any) {
+        println "Exception while determining highest SDK. Using default SDK " +
+                defaultSdk
+        StackTraceUtils.sanitize(any).printStackTrace()
+        defaultSdk
+    }
+}
+
+String getBuildToolsVersion(String defaultBuildTools) {
+    try {
+        def buildToolsVersions = buildToolsAvailable()
+        if (buildToolsVersions.contains(defaultBuildTools)) {
+            println "Use default build tools " + defaultBuildTools
+            defaultBuildTools
+        } else {
+            println "Default build tools not found, use highest found build tools " +
+                    buildToolsVersions[0]
+            buildToolsVersions[0]
+        }
+    } catch (any) {
+        println "Exception while determining latest build tools. Using default build tools " +
+                defaultBuildTools
+        StackTraceUtils.sanitize(any).printStackTrace()
+        defaultBuildTools
+    }
+}
+
+ext {
+    compileSdkVersion = getSdkVersion(22)
+    buildToolsVersion = getBuildToolsVersion("22.0.1")
+
+    targetSdkVersion = 22
+
+    versionCode = 404001
+    versionName = "0.4.4.1"
 }
 
 task clean(type: Delete) {

@@ -12,6 +12,7 @@
 
 static JNINativeMethod g_method[] = {
   { "helloWorld", "()Ljava/lang/String;", (void*)native_hello },
+  { "setString", "()Ljava/lang/String;", (void*)set_string },
 };
 
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) {
@@ -46,4 +47,8 @@ int registerNativeMethod(JNIEnv *env, const char* className,
 
 JNIEXPORT jstring JNICALL native_hello(JNIEnv* env, jclass clazz) {
   return (*env)->NewStringUTF(env, "hello load jni.");
+}
+
+JNIEXPORT void JNICALL set_string(JNIEnv* env, jclass clazz) {
+
 }
