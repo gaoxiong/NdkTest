@@ -24,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
   public static InterstitialAd duStartInterstitialAd = null;
   public Context context;
 
-  public native String helloWorld();
+//  public native String helloWorld();
 
   static {
-    System.loadLibrary("ndk_load");
-    System.loadLibrary("ijkffmpeg");
-    System.loadLibrary("ijksdl");
-    System.loadLibrary("ijkplayer");
+//    System.loadLibrary("ndk_load");
+//    System.loadLibrary("ijkffmpeg");
+//    System.loadLibrary("ijksdl");
+//    System.loadLibrary("ijkplayer");
   }
 
   @Override
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    Toast.makeText(this, helloWorld(), Toast.LENGTH_SHORT).show();
+//    Toast.makeText(this, helloWorld(), Toast.LENGTH_SHORT).show();
 
     // preload ads
     TestApplication.getInstance().initMobvistaAdWall();
